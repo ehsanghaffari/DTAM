@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+ENV/
+
+# IDE / notebooks
+.vscode/
+.idea/
+.ipynb_checkpoints/
+
+# Datasets and training outputs
+data/
+outputs/
+*.pth
+*.pt
+*.h5
+*.onnx
+*.ckpt
+
+# Logs generated during training/inference
+*.log
+*.csv
+*.xlsx
+
+# OS files
+.DS_Store
+Thumbs.db
