@@ -1,2 +1,0 @@
-model,F1 (%),IoU (%),Precision (%),Recall (%),Accuracy (%),clDice (%),Topology precision (%),Topology sensitivity (%),CC Error,Fragmentation Ratio,Fragmentation Ratio Error,Skeleton-Length Error (%)
-U-Net++ + BCE+Dice,75.28474003441163,63.856321718295725,68.7203460885795,86.43519340738344,99.3304877850091,83.14348473327514,81.50980745818414,87.30487659223377,0.45740875206088744,0.8229641550234801,0.45740875206088744,31.57736856185489

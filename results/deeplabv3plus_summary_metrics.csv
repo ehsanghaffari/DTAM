@@ -1,2 +1,0 @@
-model,F1 (%),IoU (%),Precision (%),Recall (%),Accuracy (%),clDice (%),Topology precision (%),Topology sensitivity (%),CC Error,Fragmentation Ratio,Fragmentation Ratio Error,Skeleton-Length Error (%)
-DeepLabV3+ + BCE+Dice,72.980159287361,61.20220470309843,67.11523499235545,83.05307352576925,99.28449182639228,81.51288651739662,81.66852781095946,83.6880444769015,0.4149256024138121,0.7667554234881827,0.4149256024138121,25.388137862273318
