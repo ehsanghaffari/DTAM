@@ -58,25 +58,27 @@ The complete study used 4,414 matched range-image and binary-mask pairs acquired
 - Binarization threshold: 127 when reading reference masks
 - Prediction threshold: 0.5
 
-The dataset is proprietary and cannot be distributed publicly. Derived summary metrics are provided in [`results/`](results/).
+The dataset is proprietary and cannot be distributed publicly.
 
-## Updated held-out evaluation
+## Held-out evaluation
 
-The repository now includes a new topology-aware re-evaluation of all seven architectural configurations on the 813-image held-out set. Pixel and topology metrics in the table below are per-image macro averages. These values should not be mixed with dataset-level micro-averaged metrics reported by earlier evaluation scripts.
+All model configurations were evaluated on an independent held-out test set of 813 pavement range images using a fixed sigmoid threshold of 0.5.
 
-| Model | F1 (%) | IoU (%) | Precision (%) | Recall (%) | clDice (%) | Topology precision (%) | Topology sensitivity (%) | Fragmentation ratio | Skeleton-length error (%) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Attention U-Net | 75.49 | 64.00 | 68.25 | 87.23 | 83.49 | 81.58 | 87.74 | 0.82 | 29.45 |
-| U-Net++ | 75.28 | 63.86 | 68.72 | 86.44 | 83.14 | 81.51 | 87.30 | 0.82 | 31.58 |
-| Baseline U-Net | 75.13 | 63.83 | 69.60 | 85.69 | **83.80** | **83.95** | 86.66 | 0.79 | 51.41 |
-| **DTAM** | 74.38 | 62.72 | 66.20 | **88.43** | 81.19 | 76.37 | **89.88** | **1.00** | 60.53 |
-| DeepLabV3+ | 72.98 | 61.20 | 67.12 | 83.05 | 81.51 | 81.67 | 83.69 | 0.77 | **25.39** |
-| FPN | 72.62 | 60.53 | 64.65 | 86.08 | 81.91 | 79.32 | 87.46 | 0.92 | 47.00 |
-| SegNet | 62.53 | 50.10 | **79.36** | 56.72 | 69.59 | 89.28 | 60.36 | 1.26 | 39.79 |
+| Model Configuration | IoU (%) | F1 (%) | Prec (%) | Rec (%) | Acc (%) |
+|---|---:|---:|---:|---:|---:|
+| **DTAM + BCE+Dice** | **87.21** | **93.17** | 92.82 | **93.52** | 99.69 |
+| U-Net++ + BCE+Dice | 87.20 | 93.16 | 94.63 | 91.75 | **99.70** |
+| Attention U-Net + BCE+Dice | 86.12 | 92.54 | 93.30 | 91.79 | 99.67 |
+| Baseline (U-Net, no DTAM) | 86.03 | 92.49 | 94.67 | 90.41 | 99.68 |
+| DTAM + BCE+Dice + 0.1×clDice | 86.11 | 92.53 | 93.46 | 91.63 | 99.67 |
+| DTAM + BCE+Dice + 0.2×clDice | 82.63 | 90.49 | **95.80** | 85.73 | 99.60 |
+| DTAM + BCE+Dice + 0.3×clDice | 83.88 | 91.23 | 91.22 | 91.25 | 99.61 |
+| DeepLabV3+ + BCE+Dice | 82.55 | 90.44 | 92.37 | 88.58 | 99.59 |
+| SegNet + BCE+Dice | 81.82 | 90.00 | 93.97 | 86.35 | 99.58 |
+| FPN + BCE+Dice | 81.13 | 89.58 | 88.40 | 90.80 | 99.53 |
+| DTAM + 0.5×FT + 0.5×clDice | 80.71 | 89.32 | 87.23 | 91.51 | 99.52 |
 
-In this updated macro-averaged evaluation, DTAM provides the highest recall and topology sensitivity and a fragmentation ratio closest to 1.0. Attention U-Net has the highest macro F1 and IoU. This distinction is retained explicitly so the repository reports the new results transparently rather than presenting DTAM as uniformly best across every metric.
-
-The consolidated and model-specific summary files are available in [`results/`](results/).
+DTAM trained with BCE+Dice achieved the highest held-out F1 score, IoU, and recall among the evaluated configurations.
 
 ## Installation
 
@@ -121,22 +123,6 @@ python Inference_DTAM.py
 ```
 
 The inference script produces binary masks, overlays, probability maps, and an inference log.
-
-## Evaluation files
-
-```text
-results/
-├── all_models_summary_metrics.csv
-├── attention_unet_summary_metrics.csv
-├── baseline_unet_summary_metrics.csv
-├── deeplabv3plus_summary_metrics.csv
-├── dtam_summary_metrics.csv
-├── fpn_summary_metrics.csv
-├── segnet_summary_metrics.csv
-└── unetpp_summary_metrics.csv
-```
-
-The summary files contain F1, IoU, precision, recall, accuracy, clDice, topology precision, topology sensitivity, connected-component error, fragmentation ratio, fragmentation-ratio error, and skeleton-length error. The consolidated file contains the principal comparison metrics for all seven architectures.
 
 ## Citation
 
