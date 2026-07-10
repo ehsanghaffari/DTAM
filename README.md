@@ -58,11 +58,11 @@ The complete study used 4,414 matched range-image and binary-mask pairs acquired
 - Binarization threshold: 127 when reading reference masks
 - Prediction threshold: 0.5
 
-The dataset is proprietary and cannot be distributed publicly. Derived evaluation files are provided in [`results/`](results/).
+The dataset is proprietary and cannot be distributed publicly. Derived summary metrics are provided in [`results/`](results/).
 
 ## Updated held-out evaluation
 
-The repository now includes a new per-image topology-aware re-evaluation of all seven architectural configurations on the 813-image held-out set. Pixel and topology metrics in the table below are per-image macro averages. These values should not be mixed with dataset-level micro-averaged metrics reported by earlier evaluation scripts.
+The repository now includes a new topology-aware re-evaluation of all seven architectural configurations on the 813-image held-out set. Pixel and topology metrics in the table below are per-image macro averages. These values should not be mixed with dataset-level micro-averaged metrics reported by earlier evaluation scripts.
 
 | Model | F1 (%) | IoU (%) | Precision (%) | Recall (%) | clDice (%) | Topology precision (%) | Topology sensitivity (%) | Fragmentation ratio | Skeleton-length error (%) |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -76,7 +76,7 @@ The repository now includes a new per-image topology-aware re-evaluation of all 
 
 In this updated macro-averaged evaluation, DTAM provides the highest recall and topology sensitivity and a fragmentation ratio closest to 1.0. Attention U-Net has the highest macro F1 and IoU. This distinction is retained explicitly so the repository reports the new results transparently rather than presenting DTAM as uniformly best across every metric.
 
-The complete model-level summaries and the 813 per-image records for every architecture are available in [`results/`](results/).
+The consolidated and model-specific summary files are available in [`results/`](results/).
 
 ## Installation
 
@@ -128,22 +128,15 @@ The inference script produces binary masks, overlays, probability maps, and an i
 results/
 ├── all_models_summary_metrics.csv
 ├── attention_unet_summary_metrics.csv
-├── attention_unet_per_image_metrics.csv
 ├── baseline_unet_summary_metrics.csv
-├── baseline_unet_per_image_metrics.csv
 ├── deeplabv3plus_summary_metrics.csv
-├── deeplabv3plus_per_image_metrics.csv
 ├── dtam_summary_metrics.csv
-├── dtam_per_image_metrics.csv
 ├── fpn_summary_metrics.csv
-├── fpn_per_image_metrics.csv
 ├── segnet_summary_metrics.csv
-├── segnet_per_image_metrics.csv
-├── unetpp_summary_metrics.csv
-└── unetpp_per_image_metrics.csv
+└── unetpp_summary_metrics.csv
 ```
 
-The summary files contain F1, IoU, precision, recall, accuracy, clDice, topology precision, topology sensitivity, connected-component error, fragmentation ratio, fragmentation-ratio error, and skeleton-length error. The per-image files preserve the image-level values used to calculate the macro averages.
+The summary files contain F1, IoU, precision, recall, accuracy, clDice, topology precision, topology sensitivity, connected-component error, fragmentation ratio, fragmentation-ratio error, and skeleton-length error. The consolidated file contains the principal comparison metrics for all seven architectures.
 
 ## Citation
 
