@@ -1,0 +1,2 @@
+model,F1 (%),IoU (%),Precision (%),Recall (%),Accuracy (%),clDice (%),Topology precision (%),Topology sensitivity (%),CC Error,Fragmentation Ratio,Fragmentation Ratio Error,Skeleton-Length Error (%)
+Baseline U-Net,75.13474230476604,63.82808256961915,69.60152177777132,85.69459904185427,99.34567150007865,83.80238299034707,83.95279169206783,86.65729971313348,0.4511106499479152,0.7882916431507554,0.4511106499479152,51.40618784024012
